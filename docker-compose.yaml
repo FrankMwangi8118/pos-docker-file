@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15.10
-    container_name: docker-postgres200
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
@@ -17,16 +17,16 @@ services:
       - app-network
 
   backend:
-    image: frankmwangi8118/pos:v1
+    image: frankmwangi8118/pos:v2
     container_name: pos-app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://docker-postgres200:5432/postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://docker-postgres:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
     ports:
-      - "8080:8081"  # Exposes your Spring Boot app on port 8080
+      - "8721:8082" 
     depends_on:
-      - postgres  # Ensures that PostgreSQL is up before your app starts
+      - postgres  
     networks:
       - app-network
 
